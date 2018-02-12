@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.dependency.DEPTree;
 import com.googlecode.clearnlp.io.FileExtFilter;
 import com.googlecode.clearnlp.reader.DEPReader;
@@ -44,9 +44,9 @@ public class TopicAssigner
 		DEPReader reader = new DEPReader(0, 1, 2, 3, 4, 5, 6);
 		reader.open(UTInput.createBufferedFileReader(depFile));
 		PrintStream fout = UTOutput.createPrintBufferedFileStream(outFile);
-		IntOpenHashSet[] sets;
+		IntHashSet[] sets;
 		StringBuilder build;
-		IntOpenHashSet set;
+		IntHashSet set;
 		int[] indices;
 		DEPTree tree;
 		int i, size;
@@ -82,14 +82,14 @@ public class TopicAssigner
 		fout.close();
 	}
 	
-	private IntOpenHashSet[] assignTopics(List<List<String[]>> topics, DEPTree tree)
+	private IntHashSet[] assignTopics(List<List<String[]>> topics, DEPTree tree)
 	{
 		int nodeId, topicId, i, nSize = tree.size(), tSize = topics.size(), iSize;
-		IntOpenHashSet[] sets = new IntOpenHashSet[nSize];
+		IntHashSet[] sets = new IntHashSet[nSize];
 		boolean match;
 		
 		for (nodeId=1; nodeId<nSize; nodeId++)
-			sets[nodeId] = new IntOpenHashSet();
+			sets[nodeId] = new IntHashSet();
 		
 		for (nodeId=1; nodeId<nSize; nodeId++)
 		{

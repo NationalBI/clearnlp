@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.IntHashSet;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.carrotsearch.hppc.cursors.IntCursor;
 import com.googlecode.clearnlp.dependency.DEPTree;
 import com.googlecode.clearnlp.pos.POSNode;
@@ -48,14 +48,14 @@ public class Kmeans
 	private final int RAND_SEED = 0;
 	private int K, N, D;
 	
-	private ObjectIntOpenHashMap<String> m_lexica;
+	private ObjectIntHashMap<String> m_lexica;
 	private List<int[]> v_units;
 	private double[] d_centroid;
 	private double[] d_scala;
 	
 	public Kmeans()
 	{
-		m_lexica = new ObjectIntOpenHashMap<String>();
+		m_lexica = new ObjectIntHashMap<String>();
 		v_units  = new ArrayList<int[]>();
 	}
 	
@@ -144,7 +144,7 @@ public class Kmeans
 	/** Initializes random centroids. */
 	private void initCentroids()
 	{
-		IntOpenHashSet set = new IntOpenHashSet();
+		IntHashSet set = new IntHashSet();
 		Random rand = new Random(RAND_SEED);
 		d_centroid  = new double[K*D];
 		d_scala     = new double[K];

@@ -26,8 +26,8 @@ package com.googlecode.clearnlp.experiment;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.IntHashSet;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.googlecode.clearnlp.dependency.DEPArc;
 import com.googlecode.clearnlp.dependency.DEPNode;
 import com.googlecode.clearnlp.dependency.DEPTree;
@@ -86,7 +86,7 @@ public class SRLExpand
 	
 	public String[][] expandSRL(DEPTree tree)
 	{
-		ObjectIntOpenHashMap<DEPNode> map = new ObjectIntOpenHashMap<DEPNode>();
+		ObjectIntHashMap<DEPNode> map = new ObjectIntHashMap<DEPNode>();
 		int i = 0, predId = 0, size = tree.size();
 		DEPNode pred, arg;
 		String label;
@@ -130,7 +130,7 @@ public class SRLExpand
 	
 	private int[] getSpan(DEPNode pred, DEPNode arg)
 	{
-		IntOpenHashSet sArg = arg .getSubtreeIdSet();
+		IntHashSet sArg = arg .getSubtreeIdSet();
 		
 		if (pred.isDescendentOf(arg))
 			sArg.removeAll(pred.getSubtreeIdSet());			

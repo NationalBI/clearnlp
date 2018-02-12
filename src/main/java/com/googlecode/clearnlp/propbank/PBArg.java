@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.constituent.CTTree;
 
 
@@ -149,9 +149,9 @@ public class PBArg implements Comparable<PBArg>
 	 * @param tree the constituent tree.
 	 * @return a set of terminal IDs belonging to this argument.
 	 */
-	public IntOpenHashSet getTerminalIdSet(CTTree tree)
+	public IntHashSet getTerminalIdSet(CTTree tree)
 	{
-		IntOpenHashSet set = new IntOpenHashSet();
+		IntHashSet set = new IntHashSet();
 		
 		for (PBLoc loc : l_locs)
 			set.addAll(tree.getNode(loc).getSubTerminalIdSet());
@@ -166,7 +166,7 @@ public class PBArg implements Comparable<PBArg>
 	 */
 	public int[] getSortedTerminalIdList(CTTree tree)
 	{
-		IntOpenHashSet set = getTerminalIdSet(tree);
+		IntHashSet set = getTerminalIdSet(tree);
 		int[] ids = set.toArray();
 		
 		Arrays.sort(ids);

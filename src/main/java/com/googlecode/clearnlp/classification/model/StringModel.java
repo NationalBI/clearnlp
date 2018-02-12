@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.carrotsearch.hppc.cursors.ObjectCursor;
 import com.googlecode.clearnlp.classification.prediction.StringPrediction;
 import com.googlecode.clearnlp.classification.vector.SparseFeatureVector;
@@ -47,13 +47,13 @@ import com.googlecode.clearnlp.util.pair.Pair;
 public class StringModel extends AbstractModel
 {
 	/** The map between features and their indices. */
-	protected Map<String,ObjectIntOpenHashMap<String>> m_features;
+	protected Map<String,ObjectIntHashMap<String>> m_features;
 	
 	/** Constructs a string model for training. */
 	public StringModel()
 	{
 		super();
-		m_features = new HashMap<String,ObjectIntOpenHashMap<String>>();
+		m_features = new HashMap<String,ObjectIntHashMap<String>>();
 	}
 	
 	/**
@@ -105,20 +105,20 @@ public class StringModel extends AbstractModel
 
 	protected void loadFeatures(BufferedReader fin) throws IOException
 	{
-		ObjectIntOpenHashMap<String> map;
+		ObjectIntHashMap<String> map;
 		int i, j, typeSize, valueSize;
 		String[] tmp;
 		String type;
 		
 		n_features = Integer.parseInt(fin.readLine());
 		typeSize   = Integer.parseInt(fin.readLine());
-		m_features = new HashMap<String, ObjectIntOpenHashMap<String>>();
+		m_features = new HashMap<String, ObjectIntHashMap<String>>();
 		
 		Pattern P_DELIM = Pattern.compile(" ");
 		
 		for (i=0; i<typeSize; i++)
 		{
-			map  = new ObjectIntOpenHashMap<String>();
+			map  = new ObjectIntHashMap<String>();
 			type = fin.readLine();
 			valueSize = Integer.parseInt(fin.readLine());
 			
@@ -134,7 +134,7 @@ public class StringModel extends AbstractModel
 	
 	protected void saveFeatures(PrintStream fout)
 	{
-		ObjectIntOpenHashMap<String> map;
+		ObjectIntHashMap<String> map;
 		StringBuilder build;
 		String value;
 		
@@ -168,7 +168,7 @@ public class StringModel extends AbstractModel
 	 */
 	public void addFeature(String type, String value)
 	{
-		ObjectIntOpenHashMap<String> map;
+		ObjectIntHashMap<String> map;
 		
 		if (m_features.containsKey(type))
 		{
@@ -178,7 +178,7 @@ public class StringModel extends AbstractModel
 		}
 		else
 		{
-			map = new ObjectIntOpenHashMap<String>();
+			map = new ObjectIntHashMap<String>();
 			map.put(value, n_features++);
 			m_features.put(type, map);
 		}
@@ -193,7 +193,7 @@ public class StringModel extends AbstractModel
 	public SparseFeatureVector toSparseFeatureVector(StringFeatureVector vector)
 	{
 		SparseFeatureVector sparse = new SparseFeatureVector(vector.hasWeight());
-		ObjectIntOpenHashMap<String> map;
+		ObjectIntHashMap<String> map;
 		int i, index, size = vector.size();
 		String type, value;
 		

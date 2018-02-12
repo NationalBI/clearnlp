@@ -32,7 +32,7 @@ import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 import com.carrotsearch.hppc.IntArrayList;
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.conversion.C2DInfo;
 import com.googlecode.clearnlp.morphology.MPLib;
 import com.googlecode.clearnlp.propbank.PBLoc;
@@ -423,9 +423,9 @@ public class CTNode implements Comparable<CTNode>
 		return list;
 	}
 	
-	public IntOpenHashSet getSubTerminalIdSet()
+	public IntHashSet getSubTerminalIdSet()
 	{
-		IntOpenHashSet set = new IntOpenHashSet();
+		IntHashSet set = new IntHashSet();
 		
 		for (CTNode node : getSubTerminals())
 			set.add(node.getTerminalId());

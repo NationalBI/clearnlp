@@ -27,7 +27,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.util.UTHppc;
 
 
@@ -37,13 +37,13 @@ public class UTHppcTest
 	@Test
 	public void test()
 	{
-		IntOpenHashSet set1 = new IntOpenHashSet();
+		IntHashSet set1 = new IntHashSet();
 		set1.add(3);	set1.add(1);	set1.add(2);
 		
 		assertEquals(3, UTHppc.max(set1));
 		assertEquals(1, UTHppc.min(set1));
 		
-		IntOpenHashSet set2 = new IntOpenHashSet();
+		IntHashSet set2 = new IntHashSet();
 		assertEquals(true, UTHppc.isSubset(set1, set2));
 		
 		set2.add(1);	set2.add(2);

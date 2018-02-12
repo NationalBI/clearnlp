@@ -31,8 +31,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.carrotsearch.hppc.IntArrayList;
-import com.carrotsearch.hppc.IntObjectOpenHashMap;
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntObjectHashMap;
+import com.carrotsearch.hppc.IntHashSet;
 import com.carrotsearch.hppc.cursors.IntCursor;
 import com.googlecode.clearnlp.coreference.Mention;
 import com.googlecode.clearnlp.reader.DEPReader;
@@ -340,7 +340,7 @@ public class DEPTree extends ArrayList<DEPNode>
 			
 		StringIntPair[]   H = new StringIntPair[size];
 		List<DEPCountArc> F = new ArrayList<DEPCountArc>(); 
-		IntOpenHashSet    T = new IntOpenHashSet();
+		IntHashSet    T = new IntHashSet();
 		DEPCountArc a;
 		
 		StringIntPair[] t = lHeads.get(0);
@@ -368,7 +368,7 @@ public class DEPTree extends ArrayList<DEPNode>
 		resetHeads(H);
 	}
 		
-	private List<DEPCountArc> getArcs(List<StringIntPair[]> lHeads, IntOpenHashSet T)
+	private List<DEPCountArc> getArcs(List<StringIntPair[]> lHeads, IntHashSet T)
 	{
 		Map<String,DEPCountArc> map = new HashMap<String,DEPCountArc>();
 		int i, depId, len = size(), size = lHeads.size();
@@ -437,7 +437,7 @@ public class DEPTree extends ArrayList<DEPNode>
 	/** Called by {@link DEPTree#projectivize()}. */
 	private DEPNode getSmallestNonProjectiveArc(IntArrayList ids)
 	{
-		IntOpenHashSet remove = new IntOpenHashSet();
+		IntHashSet remove = new IntHashSet();
 		DEPNode wk, nonProj = null;
 		int np, max = 0;
 		
@@ -825,9 +825,9 @@ public class DEPTree extends ArrayList<DEPNode>
 	// --------------------------------- depredicated ---------------------------------
 	
 	@Deprecated
-	public IntOpenHashSet getNonProjectiveSet()
+	public IntHashSet getNonProjectiveSet()
 	{
-		IntObjectOpenHashMap<IntOpenHashSet> map = new IntObjectOpenHashMap<IntOpenHashSet>();
+		IntObjectHashMap<IntHashSet> map = new IntObjectHashMap<IntHashSet>();
 		int i, j, bIdx, eIdx, size = size();
 		DEPNode curr, head, dep;
 		
@@ -875,15 +875,15 @@ public class DEPTree extends ArrayList<DEPNode>
 	}
 	
 	@Deprecated
-	private void addNonProjectiveMap(IntObjectOpenHashMap<IntOpenHashSet> map, int cIdx, int nIdx)
+	private void addNonProjectiveMap(IntObjectHashMap<IntHashSet> map, int cIdx, int nIdx)
 	{
-		IntOpenHashSet set;
+		IntHashSet set;
 		
 		if (map.containsKey(cIdx))
 			set = map.get(cIdx);
 		else
 		{
-			set = new IntOpenHashSet();
+			set = new IntHashSet();
 			map.put(cIdx, set);
 		}
 		
@@ -891,10 +891,10 @@ public class DEPTree extends ArrayList<DEPNode>
 	}
 	
 	@Deprecated
-	private IntOpenHashSet getNonProjectiveMapAux(IntObjectOpenHashMap<IntOpenHashSet> map)
+	private IntHashSet getNonProjectiveMapAux(IntObjectHashMap<IntHashSet> map)
 	{
 		IntIntPair max = new IntIntPair(-1, -1);
-		IntOpenHashSet set, remove;
+		IntHashSet set, remove;
 		boolean removed;
 		int[] keys;
 		
@@ -916,7 +916,7 @@ public class DEPTree extends ArrayList<DEPNode>
 			
 			if (max.i2 > 0)
 			{
-				remove = new IntOpenHashSet();
+				remove = new IntHashSet();
 				
 				for (IntCursor cur : map.get(max.i1))
 				{
@@ -939,6 +939,6 @@ public class DEPTree extends ArrayList<DEPNode>
 		}
 		while (removed);
 						
-		return new IntOpenHashSet(map.keys());
+		return new IntHashSet(map.keys());
 	}
 }

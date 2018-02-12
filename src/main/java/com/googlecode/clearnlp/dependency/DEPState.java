@@ -1,6 +1,6 @@
 package com.googlecode.clearnlp.dependency;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.util.pair.StringIntPair;
 
 public class DEPState implements Comparable<DEPState>
@@ -11,9 +11,9 @@ public class DEPState implements Comparable<DEPState>
 	public double          score;	// sum of all previous scores
 	public DEPLabel        label;
 	public StringIntPair[] heads;
-	public IntOpenHashSet  reduce;
+	public IntHashSet  reduce;
 	
-	public DEPState(int lambda, int beta, int trans, double score, DEPLabel label, StringIntPair[] heads, IntOpenHashSet reduces)
+	public DEPState(int lambda, int beta, int trans, double score, DEPLabel label, StringIntPair[] heads, IntHashSet reduces)
 	{
 		this.lambda = lambda;
 		this.beta   = beta;

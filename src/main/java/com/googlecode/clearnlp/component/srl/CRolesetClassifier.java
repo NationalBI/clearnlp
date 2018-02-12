@@ -29,7 +29,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.classification.prediction.StringPrediction;
 import com.googlecode.clearnlp.classification.train.StringTrainSpace;
@@ -62,7 +62,7 @@ public class CRolesetClassifier extends AbstractStatisticalComponent
 	
 	protected Map<String,Set<String>>		m_collect;	// for collecting lexica
 	protected Map<String,String>			m_rolesets;
-	protected ObjectIntOpenHashMap<String>	m_lemmas;
+	protected ObjectIntHashMap<String>	m_lemmas;
 	protected String[]						g_rolesets;
 	protected int 							i_pred;
 	
@@ -97,7 +97,7 @@ public class CRolesetClassifier extends AbstractStatisticalComponent
 	protected void initLexia(Object[] lexica)
 	{
 		m_rolesets = (Map<String,String>)lexica[LEXICA_ROLESETS];
-		m_lemmas   = (ObjectIntOpenHashMap<String>)lexica[LEXICA_LEMMAS];
+		m_lemmas   = (ObjectIntHashMap<String>)lexica[LEXICA_LEMMAS];
 	}
 	
 //	====================================== LOAD/SAVE MODELS ======================================
@@ -136,7 +136,7 @@ public class CRolesetClassifier extends AbstractStatisticalComponent
 		System.out.println("Loading lexica.");
 		
 		m_rolesets = UTInput.getStringMap(fin, " ");
-		m_lemmas   = UTInput.getStringIntOpenHashMap(fin, " ");
+		m_lemmas   = UTInput.getStringIntHashMap(fin, " ");
 	}
 
 	@Override
@@ -195,9 +195,9 @@ public class CRolesetClassifier extends AbstractStatisticalComponent
 		return map;
 	}
 	
-	private ObjectIntOpenHashMap<String> getLemmas(Set<String> sLemmas, Map<String,String> mRolesets)
+	private ObjectIntHashMap<String> getLemmas(Set<String> sLemmas, Map<String,String> mRolesets)
 	{
-		ObjectIntOpenHashMap<String> map = new ObjectIntOpenHashMap<String>();
+		ObjectIntHashMap<String> map = new ObjectIntHashMap<String>();
 		int idx = 0;
 		
 		for (String lemma : sLemmas)

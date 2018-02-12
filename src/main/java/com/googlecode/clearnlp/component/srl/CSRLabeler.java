@@ -35,7 +35,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.classification.train.StringTrainSpace;
 import com.googlecode.clearnlp.classification.vector.StringFeatureVector;
@@ -76,7 +76,7 @@ public class CSRLabeler extends AbstractStatisticalComponent
 	protected final String LB_NO_ARG = "N";
 	
 	protected DEPNode			d_lca;
-	protected IntOpenHashSet    s_skip;
+	protected IntHashSet    s_skip;
 	protected List<String>		l_argns;
 	protected StringIntPair[][]	g_heads;
 	protected DEPNode[]			lm_deps, rm_deps;
@@ -239,7 +239,7 @@ public class CSRLabeler extends AbstractStatisticalComponent
 	 	d_tree  = tree;
 	 	t_size  = tree.size();
 		i_pred  = getNextPredId(0);
-		s_skip  = new IntOpenHashSet();
+		s_skip  = new IntHashSet();
 		l_argns = new ArrayList<String>();
 		
 		if (i_flag != FLAG_DECODE)
@@ -435,7 +435,7 @@ public class CSRLabeler extends AbstractStatisticalComponent
 		labelDown(pred, head.getDependents());
 	}
 	
-	/** Called by {@link CSRLabeler#labelAux(DEPNode, IntOpenHashSet)}. */
+	/** Called by {@link CSRLabeler#labelAux(DEPNode, IntHashSet)}. */
 	private void labelDown(DEPNode pred, List<DEPArc> arcs)
 	{
 		DEPNode arg;

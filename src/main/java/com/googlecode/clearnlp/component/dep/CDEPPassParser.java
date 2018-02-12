@@ -26,7 +26,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.classification.prediction.StringPrediction;
 import com.googlecode.clearnlp.classification.train.StringTrainSpace;
@@ -69,7 +69,7 @@ public class CDEPPassParser extends AbstractStatisticalComponent
 	protected final String LB_REDUCE	= "R";
 	protected final String LB_PASS		= "P";
 	
-	protected IntOpenHashSet	s_reduce;
+	protected IntHashSet	s_reduce;
 	protected Prob1DMap			p_punc;		// only for collecting
 	protected Set<String>		s_punc;
 	protected StringIntPair[]	g_heads;
@@ -237,7 +237,7 @@ public class CDEPPassParser extends AbstractStatisticalComponent
 	 	d_tree   = tree;
 	 	t_size   = tree.size();
 	 	
-	 	s_reduce = new IntOpenHashSet();
+	 	s_reduce = new IntHashSet();
 	 	lm_deps  = new DEPNode[t_size];
 	 	rm_deps  = new DEPNode[t_size];
 	 	ln_sibs  = new DEPNode[t_size];

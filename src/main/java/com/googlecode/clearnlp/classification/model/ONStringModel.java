@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import com.carrotsearch.hppc.DoubleArrayList;
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.carrotsearch.hppc.cursors.ObjectCursor;
 import com.googlecode.clearnlp.classification.algorithm.AbstractAlgorithm;
 import com.googlecode.clearnlp.classification.prediction.IntPrediction;
@@ -75,8 +75,8 @@ public class ONStringModel extends StringModel
 		d_weights  = new ArrayList<DoubleArrayList>();
 		d_gs       = new ArrayList<DoubleArrayList>();
 		a_labels   = new ArrayList<String>();
-		m_labels   = new ObjectIntOpenHashMap<String>();
-		m_features = new HashMap<String,ObjectIntOpenHashMap<String>>();
+		m_labels   = new ObjectIntHashMap<String>();
+		m_features = new HashMap<String,ObjectIntHashMap<String>>();
 		i_solver   = AbstractAlgorithm.SOLVER_ADAGRAD;
 		
 		d_weights.add(getBlankDoubleArrayList(n_labels));
@@ -131,7 +131,7 @@ public class ONStringModel extends StringModel
 		String[] labels = fin.readLine().split(" ");
 		a_labels = UTArray.toList(labels);
 		
-		m_labels = new ObjectIntOpenHashMap<String>();
+		m_labels = new ObjectIntHashMap<String>();
 		
 		int i; for (i=0; i<n_labels; i++)
 			m_labels.put(labels[i], i+1);
@@ -140,20 +140,20 @@ public class ONStringModel extends StringModel
 	@Override
 	protected void loadFeatures(BufferedReader fin) throws IOException
 	{
-		ObjectIntOpenHashMap<String> map;
+		ObjectIntHashMap<String> map;
 		int i, j, typeSize, valueSize;
 		String[] tmp;
 		String type;
 		
 		n_features = Integer.parseInt(fin.readLine());
 		typeSize   = Integer.parseInt(fin.readLine());
-		m_features = new HashMap<String, ObjectIntOpenHashMap<String>>();
+		m_features = new HashMap<String, ObjectIntHashMap<String>>();
 		
 		Pattern P_DELIM = Pattern.compile(" ");
 		
 		for (i=0; i<typeSize; i++)
 		{
-			map  = new ObjectIntOpenHashMap<String>();
+			map  = new ObjectIntHashMap<String>();
 			type = fin.readLine();
 			valueSize = Integer.parseInt(fin.readLine());
 			
@@ -232,7 +232,7 @@ public class ONStringModel extends StringModel
 	@Override
 	protected void saveFeatures(PrintStream fout)
 	{
-		ObjectIntOpenHashMap<String> map;
+		ObjectIntHashMap<String> map;
 		StringBuilder build;
 		String value;
 		
@@ -311,11 +311,11 @@ public class ONStringModel extends StringModel
 	@Override
 	public void addFeature(String type, String value)
 	{
-		ObjectIntOpenHashMap<String> map = m_features.get(type);
+		ObjectIntHashMap<String> map = m_features.get(type);
 		
 		if (map == null)
 		{
-			map = new ObjectIntOpenHashMap<String>();
+			map = new ObjectIntHashMap<String>();
 			m_features.put(type, map);
 		}
 		

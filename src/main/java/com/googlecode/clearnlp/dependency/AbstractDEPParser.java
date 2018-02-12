@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.engine.AbstractEngine;
 import com.googlecode.clearnlp.feature.xml.DEPFtrXml;
 import com.googlecode.clearnlp.feature.xml.FtrToken;
@@ -48,7 +48,7 @@ abstract public class AbstractDEPParser extends AbstractEngine
 	protected final int    IDX_DEPREL	= 2;
 	
 	protected DEPTree			d_tree;
-	protected IntOpenHashSet    s_reduce;
+	protected IntHashSet    s_reduce;
 	protected Set<String>		s_punc;
 	protected StringIntPair[]	g_heads;
 	protected DEPNode[]			lm_deps;
@@ -101,7 +101,7 @@ abstract public class AbstractDEPParser extends AbstractEngine
 		n_trans  = 0;
 		i_lambda = 0;
 		i_beta   = 1;
-		s_reduce = new IntOpenHashSet();
+		s_reduce = new IntHashSet();
 		
 		if (i_flag != FLAG_PREDICT)
 			g_heads = d_tree.getHeads();

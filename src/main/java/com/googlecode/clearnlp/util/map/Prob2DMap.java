@@ -25,7 +25,7 @@ package com.googlecode.clearnlp.util.map;
 
 import java.util.HashMap;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.carrotsearch.hppc.cursors.ObjectCursor;
 import com.googlecode.clearnlp.util.pair.Pair;
 import com.googlecode.clearnlp.util.pair.StringDoublePair;
@@ -33,14 +33,14 @@ import com.googlecode.clearnlp.util.pair.StringDoublePair;
 
 
 @SuppressWarnings("serial")
-public class Prob2DMap extends HashMap<String,ObjectIntOpenHashMap<String>>
+public class Prob2DMap extends HashMap<String,ObjectIntHashMap<String>>
 {
 	static private final String TOTAL = "_T_";
 	private int i_total;
 	
 	public void add(String key, String value)
 	{
-		ObjectIntOpenHashMap<String> map;
+		ObjectIntHashMap<String> map;
 		
 		if (containsKey(key))
 		{
@@ -51,7 +51,7 @@ public class Prob2DMap extends HashMap<String,ObjectIntOpenHashMap<String>>
 		}
 		else
 		{
-			map = new ObjectIntOpenHashMap<String>();
+			map = new ObjectIntHashMap<String>();
 			put(key, map);
 
 			map.put(value, 1);
@@ -114,7 +114,7 @@ public class Prob2DMap extends HashMap<String,ObjectIntOpenHashMap<String>>
 	
 	private Pair<Double,StringDoublePair[]> getProb1DAux(String key)
 	{
-		ObjectIntOpenHashMap<String> map = get(key);
+		ObjectIntHashMap<String> map = get(key);
 		if (map == null)	return null;
 		
 		StringDoublePair[] probs = new StringDoublePair[map.size()-1];

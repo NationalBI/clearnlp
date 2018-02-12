@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.classification.train.StringTrainSpace;
 import com.googlecode.clearnlp.classification.vector.StringFeatureVector;
@@ -78,7 +78,7 @@ public class SRLabeler extends AbstractSRLabeler
 	protected DEPNode[]				lm_deps, rm_deps;
 	protected DEPNode[]				ln_sibs, rn_sibs;
 	protected DEPNode				d_lca;
-	protected IntOpenHashSet    	s_skip;
+	protected IntHashSet    	s_skip;
 	protected List<String>			l_argns;
 	
 	protected Prob1DMap		m_down, m_up;
@@ -159,7 +159,7 @@ public class SRLabeler extends AbstractSRLabeler
 	{
 		d_tree  = tree;
 		i_pred  = getNextPredId(0);
-		s_skip  = new IntOpenHashSet();
+		s_skip  = new IntHashSet();
 		l_argns = new ArrayList<String>();
 		n_trans = new IntIntPair(0, 0);
 		n_preds = 0;
@@ -170,7 +170,7 @@ public class SRLabeler extends AbstractSRLabeler
 		initArcs();
 		tree.clearSHeads();
 		
-	//	m_coverage = new IntObjectOpenHashMap<IntOpenHashSet>();
+	//	m_coverage = new IntObjectHashMap<IntHashSet>();
 	}
 	
 	/** @return the ID of the next predicate. */
@@ -359,7 +359,7 @@ public class SRLabeler extends AbstractSRLabeler
 			
 			n_preds++;
 			i_pred = getNextPredId(i_pred);
-		//	m_coverage.put(i_pred, new IntOpenHashSet(s_skip));
+		//	m_coverage.put(i_pred, new IntHashSet(s_skip));
 		}
 	}
 	
@@ -375,7 +375,7 @@ public class SRLabeler extends AbstractSRLabeler
 		labelDown(pred, head.getDependents());
 	}
 	
-	/** Called by {@link SRLabeler#labelAux(DEPNode, IntOpenHashSet)}. */
+	/** Called by {@link SRLabeler#labelAux(DEPNode, IntHashSet)}. */
 	private void labelDown(DEPNode pred, List<DEPArc> arcs)
 	{
 		DEPNode arg;
@@ -729,7 +729,7 @@ public class SRLabeler extends AbstractSRLabeler
 		return node;
 	}
 	
-/*	protected IntObjectOpenHashMap<IntOpenHashSet> m_coverage;
+/*	protected IntObjectHashMap<IntHashSet> m_coverage;
 	
 	public IntIntPair getArgCoverage(StringIntPair[][] gHeads)
 	{

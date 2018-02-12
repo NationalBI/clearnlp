@@ -32,7 +32,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.carrotsearch.hppc.cursors.ObjectCursor;
 import com.googlecode.clearnlp.classification.prediction.IntPrediction;
 import com.googlecode.clearnlp.classification.prediction.StringPrediction;
@@ -60,14 +60,14 @@ abstract public class AbstractModel
 	/** The list of all labels. */
 	protected String[] a_labels;
 	/** The map between labels and their indices. */
-	protected ObjectIntOpenHashMap<String> m_labels;
+	protected ObjectIntHashMap<String> m_labels;
 	protected byte i_solver;
 	
 	/** Constructs an abstract model for training. */
 	public AbstractModel()
 	{
 		n_labels   = 0;
-		m_labels   = new ObjectIntOpenHashMap<String>();
+		m_labels   = new ObjectIntHashMap<String>();
 		n_features = 1;
 	}
 	
@@ -326,7 +326,7 @@ abstract public class AbstractModel
 	{
 		n_labels = Integer.parseInt(fin.readLine());
 		a_labels = fin.readLine().split(" ");
-		m_labels = new ObjectIntOpenHashMap<String>();
+		m_labels = new ObjectIntHashMap<String>();
 		
 		int i;
 		for (i=0; i<n_labels; i++)

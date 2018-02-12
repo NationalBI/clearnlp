@@ -30,7 +30,7 @@ import jregex.Replacer;
 import jregex.Substitution;
 import jregex.TextBuffer;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.googlecode.clearnlp.morphology.MPLib;
 import com.googlecode.clearnlp.util.UTArray;
 import com.googlecode.clearnlp.util.pair.IntIntPair;
@@ -79,8 +79,8 @@ public class EnglishTokenizer extends AbstractTokenizer
 	protected Set<String>					T_EMOTICONS;
 	protected Set<String>					T_ABBREVIATIONS;
 	protected Pattern						P_HYPHEN_LIST;
-	protected ObjectIntOpenHashMap<String>	M_D0D;
-	protected ObjectIntOpenHashMap<String>	M_COMPOUNDS;
+	protected ObjectIntHashMap<String>	M_D0D;
+	protected ObjectIntHashMap<String>	M_COMPOUNDS;
 	protected List<IntIntPair[]>			L_COMPOUNDS;
 	protected Pattern[]						P_RECOVER_D0D;
 	protected Pattern						P_RECOVER_DOT;
@@ -196,7 +196,7 @@ public class EnglishTokenizer extends AbstractTokenizer
 	/** Called by {@link EnglishTokenizer#EnglishTokenizer(ZipInputStream)}. */
 	private void initMapsD0D()
 	{
-		M_D0D = new ObjectIntOpenHashMap<String>();
+		M_D0D = new ObjectIntHashMap<String>();
 		int i, size = A_D0D.length;
 		
 		for (i=0; i<size; i++)
@@ -274,7 +274,7 @@ public class EnglishTokenizer extends AbstractTokenizer
 	private void initDictionariesComounds(ZipInputStream zin) throws Exception
 	{
 		BufferedReader fin = new BufferedReader(new InputStreamReader(zin));
-		M_COMPOUNDS = new ObjectIntOpenHashMap<String>();
+		M_COMPOUNDS = new ObjectIntHashMap<String>();
 		L_COMPOUNDS = new ArrayList<IntIntPair[]>();
 		
 		int i, j, len, bIdx, eIdx;

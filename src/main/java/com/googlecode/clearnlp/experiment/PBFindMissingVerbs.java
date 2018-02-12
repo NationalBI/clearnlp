@@ -31,7 +31,7 @@ import java.util.Map;
 
 import org.kohsuke.args4j.Option;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.carrotsearch.hppc.cursors.IntCursor;
 import com.googlecode.clearnlp.constituent.CTLibEn;
 import com.googlecode.clearnlp.constituent.CTNode;
@@ -65,7 +65,7 @@ public class PBFindMissingVerbs extends AbstractRun
 		Map<String,List<PBInstance>> map = PBLib.getPBInstanceMap(s_propFile, s_treeDir, false);
 		AbstractMPAnalyzer morph = new EnglishMPAnalyzer(s_dictFile);
 		List<List<PBInstance>> lists = new ArrayList<List<PBInstance>>();
-		IntOpenHashSet[] sets = new IntOpenHashSet[4];
+		IntHashSet[] sets = new IntHashSet[4];
 		int i, size = sets.length;
 		List<PBInstance> list;
 		PBInstance fst;
@@ -93,20 +93,20 @@ public class PBFindMissingVerbs extends AbstractRun
 			printPredicates(lists.get(i), s_outFile+"."+i);
 	}
 	
-	private void init(IntOpenHashSet[] sets, List<List<PBInstance>> lists)
+	private void init(IntHashSet[] sets, List<List<PBInstance>> lists)
 	{
 		int i, size = sets.length;
 		
 		for (i=0; i<size; i++)
 		{
-			sets[i] = new IntOpenHashSet();
+			sets[i] = new IntHashSet();
 			lists.add(new ArrayList<PBInstance>());
 		}
 	}
 	
-	private void getPredicateIds(CTTree tree, IntOpenHashSet[] sets)
+	private void getPredicateIds(CTTree tree, IntHashSet[] sets)
 	{
-		for (IntOpenHashSet set : sets)
+		for (IntHashSet set : sets)
 			set.clear();
 				
 		int idx;
@@ -192,16 +192,16 @@ public class PBFindMissingVerbs extends AbstractRun
 		return false;
 	}
 	
-	private void removeExistingPredicates(IntOpenHashSet[] sets, List<PBInstance> list)
+	private void removeExistingPredicates(IntHashSet[] sets, List<PBInstance> list)
 	{
 		for (PBInstance inst : list)
 		{
-			for (IntOpenHashSet set : sets)
+			for (IntHashSet set : sets)
 				set.remove(inst.predId);
 		}
 	}
 	
-	private void addMissingPredicates(CTTree tree, AbstractMPAnalyzer morph, PBInstance fst, IntOpenHashSet set, List<PBInstance> list)
+	private void addMissingPredicates(CTTree tree, AbstractMPAnalyzer morph, PBInstance fst, IntHashSet set, List<PBInstance> list)
 	{
 		PBInstance inst;
 		String lemma;

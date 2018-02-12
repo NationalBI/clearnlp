@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.ner.NERNode;
 import com.googlecode.clearnlp.pos.POSNode;
 import com.googlecode.clearnlp.reader.AbstractColumnReader;
@@ -578,15 +578,15 @@ public class DEPNode extends NERNode implements Comparable<DEPNode>
 		return false;
 	}
 	
-	public IntOpenHashSet getSubtreeIdSet()
+	public IntHashSet getSubtreeIdSet()
 	{
-		IntOpenHashSet set = new IntOpenHashSet();
+		IntHashSet set = new IntHashSet();
 		
 		getSubtreeIdSetAux(set, this);
 		return set;
 	}
 
-	private void getSubtreeIdSetAux(IntOpenHashSet set, DEPNode curr)
+	private void getSubtreeIdSetAux(IntHashSet set, DEPNode curr)
 	{
 		set.add(curr.id);
 		
@@ -596,7 +596,7 @@ public class DEPNode extends NERNode implements Comparable<DEPNode>
 	
 	public int[] getSubtreeIdArray()
 	{
-		IntOpenHashSet set = getSubtreeIdSet();
+		IntHashSet set = getSubtreeIdSet();
 		int[] list = set.toArray();
 		Arrays.sort(list);
 		

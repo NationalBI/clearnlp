@@ -29,7 +29,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.googlecode.clearnlp.classification.algorithm.AbstractAlgorithm;
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.classification.prediction.StringPrediction;
@@ -76,7 +76,7 @@ public class CDEPBackParser extends AbstractStatisticalComponent
 	protected final String LB_REDUCE	= "R";
 	protected final String LB_PASS		= "P";
 	
-	protected IntOpenHashSet	s_reduce;
+	protected IntHashSet	s_reduce;
 	protected Prob1DMap			p_punc;		// only for collecting
 	protected Set<String>		s_punc;
 	protected StringIntPair[]	g_heads;
@@ -309,7 +309,7 @@ public class CDEPBackParser extends AbstractStatisticalComponent
 	 	i_beta   = 1;
 	 	d_score  = 0;
 	 	n_trans  = 0;
-	 	s_reduce = new IntOpenHashSet();
+	 	s_reduce = new IntHashSet();
 	}
 	
 	/** Called by {@link CDEPBackParser#process(DEPTree)}. */

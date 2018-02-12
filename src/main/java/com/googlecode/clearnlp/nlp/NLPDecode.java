@@ -28,7 +28,7 @@ import org.kohsuke.args4j.Option;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.googlecode.clearnlp.component.AbstractComponent;
 import com.googlecode.clearnlp.component.dep.CDEPBackParser;
 import com.googlecode.clearnlp.component.dep.CDEPPassParser;
@@ -294,7 +294,7 @@ public class NLPDecode extends AbstractNLP
 	{
 		AbstractComponent[] components = new AbstractComponent[modes.size()];
 		NodeList list = eModels.getElementsByTagName(TAG_MODEL);
-		ObjectIntOpenHashMap<String> map = getModeMap(modes);
+		ObjectIntHashMap<String> map = getModeMap(modes);
 		String language = getLanguage(eModels);
 		int i, idx, size = list.getLength();
 		Element eModel;
@@ -332,9 +332,9 @@ public class NLPDecode extends AbstractNLP
 	}
 	
 	/** Called by {@link NLPDecode#getComponent(Element, List)}. */
-	private ObjectIntOpenHashMap<String> getModeMap(List<String> modes)
+	private ObjectIntHashMap<String> getModeMap(List<String> modes)
 	{
-		ObjectIntOpenHashMap<String> map = new ObjectIntOpenHashMap<String>();
+		ObjectIntHashMap<String> map = new ObjectIntHashMap<String>();
 		int i, size = modes.size();
 		
 		for (i=0; i<size; i++)

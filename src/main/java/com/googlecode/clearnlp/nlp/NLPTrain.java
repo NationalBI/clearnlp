@@ -30,7 +30,7 @@ import java.util.zip.ZipOutputStream;
 import org.kohsuke.args4j.Option;
 import org.w3c.dom.Element;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.classification.train.StringTrainSpace;
 import com.googlecode.clearnlp.component.AbstractStatisticalComponent;
@@ -340,7 +340,7 @@ public class NLPTrain extends AbstractNLP
 	protected StringTrainSpace[] getStringTrainSpaces(JointFtrXml[] xmls, Object[] lexica, String mode, int boot)
 	{
 		if      (mode.equals(NLPLib.MODE_ROLE) || mode.startsWith(NLPLib.MODE_SENSE))
-			return getStringTrainSpaces(xmls[0], ((ObjectIntOpenHashMap<String>)lexica[1]).size());
+			return getStringTrainSpaces(xmls[0], ((ObjectIntHashMap<String>)lexica[1]).size());
 		else if (mode.equals(NLPLib.MODE_SRL))
 			return getStringTrainSpaces(xmls[0], 2);
 		else if (boot > 0 && mode.equals(NLPLib.MODE_DEP_BACK))

@@ -28,8 +28,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.carrotsearch.hppc.IntArrayList;
-import com.carrotsearch.hppc.IntIntOpenHashMap;
-import com.carrotsearch.hppc.IntObjectOpenHashMap;
+import com.carrotsearch.hppc.IntIntHashMap;
+import com.carrotsearch.hppc.IntObjectHashMap;
 
 /**
  * Constituent library.
@@ -54,14 +54,14 @@ public class CTLib
 	static public void normalizeIndices(CTTree tree)
 	{
 		// retrieve all co-indexes
-		IntObjectOpenHashMap<List<CTNode>> mOrg = new IntObjectOpenHashMap<List<CTNode>>();
+		IntObjectHashMap<List<CTNode>> mOrg = new IntObjectHashMap<List<CTNode>>();
 		getCoIndexMap(tree.getRoot(), mOrg);
 		if (mOrg.isEmpty())	return;
 		
 		int[] keys = mOrg.keys().toArray();
 		Arrays.sort(keys);
 		
-		IntIntOpenHashMap mNew = new IntIntOpenHashMap();		
+		IntIntHashMap mNew = new IntIntHashMap();		
 		int coIndex = 1, last, i;
 		List<CTNode> list;
 		CTNode curr, ec;
@@ -109,7 +109,7 @@ public class CTLib
 	}
 	
 	/** Called by {@link CTReader#normalizeIndices(CTTree)}. */
-	static private void getCoIndexMap(CTNode curr, IntObjectOpenHashMap<List<CTNode>> map)
+	static private void getCoIndexMap(CTNode curr, IntObjectHashMap<List<CTNode>> map)
 	{
 		if (curr.isPhrase())
 		{
@@ -140,7 +140,7 @@ public class CTLib
 	}
 	
 	/** Called by {@link CTReader#normalizeIndices(CTTree)}. */
-	static private void remapGapIndices(IntIntOpenHashMap map, int[] lastIndex, CTNode curr)
+	static private void remapGapIndices(IntIntHashMap map, int[] lastIndex, CTNode curr)
 	{
 		int gapIndex = curr.gapIndex;
 		

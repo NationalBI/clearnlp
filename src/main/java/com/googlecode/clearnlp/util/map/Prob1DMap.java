@@ -30,12 +30,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.carrotsearch.hppc.cursors.ObjectCursor;
 import com.googlecode.clearnlp.util.pair.StringIntPair;
 
 
-public class Prob1DMap extends ObjectIntOpenHashMap<String>
+public class Prob1DMap extends ObjectIntHashMap<String>
 {
 	private int i_total;
 	

@@ -27,7 +27,7 @@ import org.kohsuke.args4j.CmdLineParser;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.googlecode.clearnlp.classification.algorithm.AdaGrad;
 import com.googlecode.clearnlp.classification.algorithm.AdaGradLR;
 import com.googlecode.clearnlp.classification.model.AbstractModel;
@@ -156,7 +156,7 @@ abstract public class AbstractNLP
 	
 	protected JointReader getJointReader(Element eReader)
 	{
-		ObjectIntOpenHashMap<String> map = getFieldMap(eReader);
+		ObjectIntHashMap<String> map = getFieldMap(eReader);
 		
 		int iId		= map.get(AbstractColumnReader.FIELD_ID)	 - 1;
 		int iForm	= map.get(AbstractColumnReader.FIELD_FORM)	 - 1;
@@ -174,14 +174,14 @@ abstract public class AbstractNLP
 	}
 	
 	/** Called by {@link AbstractNLP#getCDEPReader(Element, String)}. */
-	private ObjectIntOpenHashMap<String> getFieldMap(Element eReader)
+	private ObjectIntHashMap<String> getFieldMap(Element eReader)
 	{
 		NodeList list = eReader.getElementsByTagName(TAG_READER_COLUMN);
 		int i, index, size = list.getLength();
 		Element element;
 		String field;
 		
-		ObjectIntOpenHashMap<String> map = new ObjectIntOpenHashMap<String>();
+		ObjectIntHashMap<String> map = new ObjectIntHashMap<String>();
 		
 		for (i=0; i<size; i++)
 		{

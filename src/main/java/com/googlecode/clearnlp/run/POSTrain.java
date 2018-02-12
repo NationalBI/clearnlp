@@ -31,7 +31,7 @@ import java.util.Set;
 import org.kohsuke.args4j.Option;
 import org.w3c.dom.Element;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
+import com.carrotsearch.hppc.IntHashSet;
 import com.carrotsearch.hppc.cursors.ObjectCursor;
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.classification.train.StringTrainSpace;
@@ -141,7 +141,7 @@ public class POSTrain extends AbstractRun
 		return taggers;
 	}
 
-	/** Called by {@link POSTrain#getTrainedTaggers(Element, POSReader, POSFtrXml, String[], IntOpenHashSet)}. */
+	/** Called by {@link POSTrain#getTrainedTaggers(Element, POSReader, POSFtrXml, String[], IntHashSet)}. */
 	private Set<String> getLemmaSet(POSReader reader, POSFtrXml xml, int modId, String[] trnFiles, int devId) throws Exception
 	{
 		int dfCutoff = xml.getDocumentFrequency(modId);
@@ -186,7 +186,7 @@ public class POSTrain extends AbstractRun
 		return set;
 	}
 	
-	/** Called by {@link POSTrain#getTrainedTaggers(Element, POSReader, POSFtrXml, String[], IntOpenHashSet)}. */
+	/** Called by {@link POSTrain#getTrainedTaggers(Element, POSReader, POSFtrXml, String[], IntHashSet)}. */
 	private Pair<Set<String>,Map<String,String>> getLexica(POSReader reader, POSFtrXml xml, int xmlId, Set<String> sLemmas, String[] trnFiles, int devId)
 	{
 		POSTagger tagger = new POSTagger(sLemmas);
@@ -218,7 +218,7 @@ public class POSTrain extends AbstractRun
 		return new Pair<Set<String>,Map<String,String>>(sForms, mAmbi);
 	}
 	
-	/** Called by {@link POSTrain#getTrainedTaggers(Element, POSReader, POSFtrXml, String[], IntOpenHashSet)}. */
+	/** Called by {@link POSTrain#getTrainedTaggers(Element, POSReader, POSFtrXml, String[], IntHashSet)}. */
 	private StringTrainSpace getTrainSpace(POSReader reader, POSFtrXml xml, int modId, Set<String> sLemmas, Set<String> sForms, Map<String, String> ambiguityMap, String[] trnFiles, int devId)
 	{
 		StringTrainSpace space = new StringTrainSpace(false, xml.getLabelCutoff(modId), xml.getFeatureCutoff(modId));

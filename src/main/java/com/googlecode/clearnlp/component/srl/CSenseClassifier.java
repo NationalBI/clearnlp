@@ -29,7 +29,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import com.carrotsearch.hppc.ObjectIntOpenHashMap;
+import com.carrotsearch.hppc.ObjectIntHashMap;
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.classification.prediction.StringPrediction;
 import com.googlecode.clearnlp.classification.train.StringTrainSpace;
@@ -62,7 +62,7 @@ public class CSenseClassifier extends AbstractStatisticalComponent
 	
 	protected Map<String,Set<String>>		m_collect;	// for collecting lexica
 	protected Map<String,String>			m_senses;
-	protected ObjectIntOpenHashMap<String>	m_lemmas;
+	protected ObjectIntHashMap<String>	m_lemmas;
 	protected String[]						g_senses;
 	protected int 							i_pred;
 	protected String						s_key;
@@ -104,7 +104,7 @@ public class CSenseClassifier extends AbstractStatisticalComponent
 	protected void initLexia(Object[] lexica)
 	{
 		m_senses = (Map<String,String>)lexica[LEXICA_SENSES];
-		m_lemmas = (ObjectIntOpenHashMap<String>)lexica[LEXICA_LEMMAS];
+		m_lemmas = (ObjectIntHashMap<String>)lexica[LEXICA_LEMMAS];
 	}
 	
 	private void initKey(String key)
@@ -153,7 +153,7 @@ public class CSenseClassifier extends AbstractStatisticalComponent
 		System.out.println("Loading lexica.");
 		
 		m_senses = UTInput.getStringMap(fin, " ");
-		m_lemmas = UTInput.getStringIntOpenHashMap(fin, " ");
+		m_lemmas = UTInput.getStringIntHashMap(fin, " ");
 	}
 
 	@Override
@@ -211,9 +211,9 @@ public class CSenseClassifier extends AbstractStatisticalComponent
 		return map;
 	}
 	
-	private ObjectIntOpenHashMap<String> getLemmas(Set<String> sLemmas, Map<String,String> mSenses)
+	private ObjectIntHashMap<String> getLemmas(Set<String> sLemmas, Map<String,String> mSenses)
 	{
-		ObjectIntOpenHashMap<String> map = new ObjectIntOpenHashMap<String>();
+		ObjectIntHashMap<String> map = new ObjectIntHashMap<String>();
 		int idx = 0;
 		
 		for (String lemma : sLemmas)
