@@ -23,6 +23,8 @@
 */
 package com.googlecode.clearnlp.headrule;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -102,7 +104,9 @@ public class HeadTagSet
 			build.append(tags.substring(0, tags.length()-2));
 		}
 		
-		for (String fTag : f_tags)
+		ArrayList<String> sortedTags = new ArrayList<String>(f_tags);
+		Collections.sort(sortedTags);
+		for (String fTag : sortedTags)
 		{
 			build.append(DELIM_TAGS);
 			build.append(PREFIX_FTAG);
